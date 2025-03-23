@@ -16,9 +16,6 @@ class WildberriesParserBot:
         self.bot = Bot(token=token)
         self.storage = MemoryStorage()
         self.dp = Dispatcher(storage=self.storage)
-        
-        # Настройка логирования
-        logging.basicConfig(level=logging.INFO)
 
         # Регистрация обработчиков
         self._register_handlers()

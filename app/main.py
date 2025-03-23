@@ -11,9 +11,23 @@ load_dotenv()
 
 async def main():
     # Настраиваем логирование
+    log_dir = 'logs'
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    
+    log_file = os.path.join(log_dir, 'wb_bot.log')
+    
+    # Настраиваем формат логирования
+    log_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    
+    # Настраиваем корневой логгер
     logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        format=log_format,
+        handlers=[
+            logging.StreamHandler(),  # Вывод в консоль
+            logging.FileHandler(log_file)  # Вывод в файл
+        ]
     )
 
     # Запускаем сервер для healthcheck
